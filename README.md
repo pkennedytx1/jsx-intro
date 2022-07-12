@@ -9,3 +9,7 @@ npm start
 ```
 
 This will install dependencies as well as starting the react application. Keep in mind we are going to focus only on the JSX aspect instead of the React.
+
+## Supporting Documentation
+[React JSX Docs](https://reactjs.org/docs/introducing-jsx.html)
+[JSX More In Depth](https://www.reactenlightenment.com/react-jsx/5.1.html)
