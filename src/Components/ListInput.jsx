@@ -1,17 +1,56 @@
 import React from 'react';
 
 const ListInput = ({ handleNewPerson }) => {
-    const [input, setInput] = React.useState();
+    const [showError, setShowError] = React.useState(false);
+    const [formData, setFormData] = React.useState({
+        firstName: '',
+        lastName: '',
+        vacationPreference: '',
+        meetingDate: '',
+    });
+    
+    const [validationErrors, setValidationErrors] = React.useState({
+        firstName: '',
+        lastName: '',
+        vacationPreference: '',
+        meetingDate: '',
+    })
+
+    const hanldFormValidation = (formData) => {
+        const tempValidationErrors = { ...validationErrors};
+        Object.keys(formData).forEach((key) => {
+            if (formData[key] === '') {
+                tempValidationErrors[key] = 'Field is required';
+            }
+            if (key === 'meetingDate') {
+                // do custommeeting date validation
+            }
+        })
+        console.log(tempValidationErrors);
+        setValidationErrors(tempValidationErrors);
+        // handleNewPerson(formData);
+    }
+
     return(
         <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '250px' }}>
             <h2>Vacation Inquiry</h2>
-            <label for="first-name">First Name</label>
-            <input id='first-name' value={input} onChange={(e) => {
-                setInput(e.target.value);
-            }} />
+            <label htmlFor="first-name">First Name</label>
+            <input id='first-name'
+                value={formData.firstName}
+                onChange={(e) => {
+                    setFormData({ ...formData, firstName: e.target.value });
+                }} 
+            />
+            <span style={{ color: 'red' }}>{validationErrors.firstName}</span>
             <span style={{ margin: '5px' }} />
-            <label for="last-name">Last Name</label>
-            <input id='last-name' />
+            <label htmlFor="last-name">Last Name</label>
+            <input id='last-name'
+                value={formData.lastName}
+                onChange={(e) => {
+                    setFormData({ ...formData, lastName: e.target.value });
+                }}
+            />
+            <span style={{ color: 'red' }}>{validationErrors.lastName}</span>
             <span style={{ margin: '5px' }} />
             <fieldset>
                 <legend>Select prefered vacation.</legend>
@@ -21,8 +60,15 @@ const ListInput = ({ handleNewPerson }) => {
                         id="mountains"
                         name="drone"
                         value="Mountains"
+                        checked={formData.vacationPreference === 'Mountains'}
+                        onChange={(e) => {
+                            setFormData({ 
+                                ...formData,
+                                vacationPreference: e.currentTarget.value
+                            });
+                        }}
                     />
-                    <label for="mountains">Mountains</label>
+                    <label htmlFor="mountains">Mountains</label>
                 </div>
                 <div>
                     <input
@@ -30,15 +76,33 @@ const ListInput = ({ handleNewPerson }) => {
                         id="beach"
                         name="drone"
                         value="Beach"
+                        checked={formData.vacationPreference === 'Beach'}
+                        onChange={(e) => {
+                            setFormData({ 
+                                ...formData,
+                                vacationPreference: e.currentTarget.value
+                            });
+                        }}
                     />
-                    <label for="beach">Beach</label>
+                    <label htmlFor="beach">Beach</label>
                 </div>
             </fieldset>
+            <span style={{ color: 'red' }}>{validationErrors.vacationPreference}</span>
             <span style={{ margin: '5px' }} />
             <label>Availability for appointment within the next seven days</label>
-            <input type='date' />
+            <input
+                type='date'
+                value={formData.meetingDate}
+                onChange={(e) => {
+                    setFormData({ 
+                        ...formData,
+                        meetingDate: e.target.value
+                    });
+                }}
+            />
+            <span style={{ color: 'red' }}>{validationErrors.meetingDate}</span>
             <span style={{ margin: '5px' }} />
-            <button onClick={() => handleNewPerson(input)} >Add Client Appointment</button>
+            <button onClick={() => hanldFormValidation(formData)} >Add Client Appointment</button>
         </div>
     )
 }

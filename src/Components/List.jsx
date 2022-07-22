@@ -5,10 +5,10 @@ import ListInput from './ListInput';
 
 const List = () => {
     const [data, setData] = React.useState(initialData);
-    const handleNewPerson = (input) => {
+    const handleNewPerson = ({ firstName, lastName }) => {
         setData([...data, {
-            firstName: input,
-            lastName: input,
+            firstName: firstName,
+            lastName: lastName,
             beachOrMountains: 'Mountains',
         }])
     }
