@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ListInput = ({ handleNewPerson }) => {
-    const [showError, setShowError] = React.useState(false);
+
     const [formData, setFormData] = React.useState({
         firstName: '',
         lastName: '',
@@ -17,18 +17,21 @@ const ListInput = ({ handleNewPerson }) => {
     })
 
     const hanldFormValidation = (formData) => {
-        const tempValidationErrors = { ...validationErrors};
+        const tempValidationErrors = { ...validationErrors };
+        let isError = false;
         Object.keys(formData).forEach((key) => {
             if (formData[key] === '') {
                 tempValidationErrors[key] = 'Field is required';
+                isError = true;
+            } else {
+                tempValidationErrors[key] = ''
             }
             if (key === 'meetingDate') {
                 // do custommeeting date validation
-            }
+            } 
         })
-        console.log(tempValidationErrors);
         setValidationErrors(tempValidationErrors);
-        // handleNewPerson(formData);
+        !isError && handleNewPerson(formData);
     }
 
     return(
