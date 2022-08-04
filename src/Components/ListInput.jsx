@@ -1,4 +1,5 @@
 import React from 'react';
+import { FetchDestinations } from '../fetchDestinations';
 
 const ListInput = ({ handleNewPerson }) => {
 
@@ -91,6 +92,7 @@ const ListInput = ({ handleNewPerson }) => {
                 </div>
             </fieldset>
             <span style={{ color: 'red' }}>{validationErrors.vacationPreference}</span>
+            <FetchDestinations />
             <span style={{ margin: '5px' }} />
             <label>Availability for appointment within the next seven days</label>
             <input
