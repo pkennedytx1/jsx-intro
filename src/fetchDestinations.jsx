@@ -29,26 +29,27 @@ const reducer = (state, action) => {
 export const FetchDestinations  = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const options = {
-        method: 'POST',
-        url: 'https://travel-places.p.rapidapi.com/',
-        headers: {
-          'content-type': 'application/json',
-          'X-RapidAPI-Key': process.env.REACT_APP_TRAVEL_PLACES_API_KEY,
-          'X-RapidAPI-Host': 'travel-places.p.rapidapi.com'
-        },
-        data: {"query":`query {
-        getPlaces(categories: "CITY", lat: 30.2672, lng:-97.7431, maxDistMeters:1000000) {
-          name
-        }
-      }`}
-      };
+    // const options = {
+    //     method: 'POST',
+    //     url: 'https://travel-places.p.rapidapi.com/',
+    //     headers: {
+    //       'content-type': 'application/json',
+    //       'X-RapidAPI-Key': process.env.REACT_APP_TRAVEL_PLACES_API_KEY,
+    //       'X-RapidAPI-Host': 'travel-places.p.rapidapi.com'
+    //     },
+    //     data: {"query":`query {
+    //     getPlaces(categories: "CITY", lat: 30.2672, lng:-97.7431, maxDistMeters:1000000) {
+    //       name
+    //     }
+    //   }`}
+    //   };
 
     useEffect(() => {
         axios
-            .request(options)
+            // .request(options)
+            .get('https://nominatim.openstreetmap.org/search.php?city=dallas&format=jsonv2')
             .then((response) => {
-                dispatch({ type: 'FETCH_SUCCESS', payload: response.data.data.getPlaces })
+                dispatch({ type: 'FETCH_SUCCESS', payload: response.data })
             })
             .catch((error) => {
                 dispatch({ type: 'FETCH_ERROR', payload: error.message || 'Something went wrong'})
@@ -61,7 +62,7 @@ export const FetchDestinations  = () => {
             {state.loading ? 'Loading...' : 
                 <select name='destination-select'>
                     {state.places?.length > 0 && state.places.map((place) => {
-                        return <option>{place.name}</option>
+                        return <option>{place.display_name}</option>
                     })}
                 </select>
             }
