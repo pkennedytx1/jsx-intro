@@ -92,6 +92,7 @@ const ListInput = ({ handleNewPerson }) => {
                 </div>
             </fieldset>
             <span style={{ color: 'red' }}>{validationErrors.vacationPreference}</span>
+            <span style={{ margin: '5px' }} />
             <FetchDestinations />
             <span style={{ margin: '5px' }} />
             <label>Availability for appointment within the next seven days</label>
