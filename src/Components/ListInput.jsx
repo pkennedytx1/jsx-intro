@@ -1,4 +1,5 @@
 import React from 'react';
+import { DestinationDropdown } from './DestinationDropdown';
 
 const ListInput = ({ handleNewPerson }) => {
 
@@ -91,6 +92,8 @@ const ListInput = ({ handleNewPerson }) => {
                 </div>
             </fieldset>
             <span style={{ color: 'red' }}>{validationErrors.vacationPreference}</span>
+            <span style={{ margin: '5px' }} />
+                <DestinationDropdown />
             <span style={{ margin: '5px' }} />
             <label>Availability for appointment within the next seven days</label>
             <input
