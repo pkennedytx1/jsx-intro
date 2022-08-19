@@ -44,7 +44,7 @@ export const reducer = (state, action) => {
     }
 }
 
-export const DestinationDropdown = () => {
+export const DestinationDropdown = ({ formData, setFormData }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
@@ -73,13 +73,17 @@ export const DestinationDropdown = () => {
                 type: 'UPDATE_LOCATION',
                 payload: e.target.value,
             })} name='destination-search' type='text' />
-            <button onClick={() => dispatch({
+            <button className='btn btn-primary' onClick={() => dispatch({
                 type: 'UPDATE_SEARCH',
                 payload: true,
             })} >Search</button>
             <label htmlFor='destination-dropdown'>Select your prefered destination</label>
             {state.loading ? 'Loading...' :
-                <select disabled={!state.places.length > 0} name='destination-.dropdown'>
+                <select value={formData.vacationLocation} onChange={(e) => setFormData({
+                    ...formData,
+                    vacationLocation: e.target.value,
+                })} disabled={!state.places.length > 0} name='destination-.dropdown'>
+                    <option value=''>Please Select a Location</option>
                     {state.places?.length > 0 && state.places.map((place) => {
                         return <option key={place.place_id} value={place.display_name}>{place.display_name}</option>
                     })}

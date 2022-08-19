@@ -1,16 +1,16 @@
 import { CardContainer, Spacer } from './ListItem.styles';
 
 const ListItem = ({ person, value, handleRemoveAppointment }) => {
-    const { firstName, lastName, beachOrMountains } = person;
+    const { firstName, lastName, vacationPreference } = person;
     return(
-        <CardContainer isPink={beachOrMountains === 'Beach'}>
+        <CardContainer isPink={vacationPreference === 'Beach'}>
             <img
-                alt={beachOrMountains === 'Beach' ? 'beach' : 'mountains'}
+                alt={vacationPreference === 'Beach' ? 'beach' : 'mountains'}
                 height='46px'
-                src={beachOrMountains === 'Beach' ? 'beach.svg' : 'mountain.svg'}
+                src={vacationPreference === 'Beach' ? 'beach.svg' : 'mountain.svg'}
             />
             <h1>{firstName} {lastName}</h1>
-            <button value={value} onClick={(e) => handleRemoveAppointment(e.target.value)}>Remove Appt</button>
+            <button className='btn btn-danger' value={value} onClick={(e) => handleRemoveAppointment(e.target.value)}>Remove Appt</button>
         </CardContainer>
     )
 }

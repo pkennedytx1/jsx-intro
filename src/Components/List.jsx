@@ -6,15 +6,26 @@ import { Spacer } from './ListItem.styles';
 
 const List = () => {
     const [data, setData] = React.useState(initialData);
-    const handleNewPerson = ({ firstName, lastName }) => {
+    const handleNewPerson = ({ firstName, lastName, vacationLocation, vacationPreference, meetingDate }) => {
         const lastId = data[data.length - 1].id;
-        console.log(lastId);
         setData([...data, {
             id: lastId + 1,
-            firstName: firstName,
-            lastName: lastName,
-            beachOrMountains: 'Mountains',
+            firstName,
+            lastName,
+            vacationPreference,
+            vacationLocation,
+            meetingDate,
         }])
+    }
+
+    const handleStateReset = (setFormState) => {
+        setFormState({
+            firstName: '',
+            lastName: '',
+            vacationPreference: '',
+            vacationLocation: '',
+            meetingDate: '',
+        })
     }
     
     const handleRemoveAppointment = (id) => {
@@ -25,7 +36,7 @@ const List = () => {
 
     return(
         <>
-            <ListInput handleNewPerson={handleNewPerson}/>
+            <ListInput handleNewPerson={handleNewPerson} handleStateReset={handleStateReset}/>
             {
                 data?.map((person) => {
                     return (

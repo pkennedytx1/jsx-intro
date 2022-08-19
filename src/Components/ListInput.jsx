@@ -1,12 +1,13 @@
 import React from 'react';
 import { DestinationDropdown } from './DestinationDropdown';
 
-const ListInput = ({ handleNewPerson }) => {
+const ListInput = ({ handleNewPerson, handleStateReset }) => {
 
     const [formData, setFormData] = React.useState({
         firstName: '',
         lastName: '',
         vacationPreference: '',
+        vacationLocation: '',
         meetingDate: '',
     });
     
@@ -14,6 +15,7 @@ const ListInput = ({ handleNewPerson }) => {
         firstName: '',
         lastName: '',
         vacationPreference: '',
+        vacationLocation: '',
         meetingDate: '',
     })
 
@@ -33,7 +35,10 @@ const ListInput = ({ handleNewPerson }) => {
         })
         setValidationErrors(tempValidationErrors);
         !isError && handleNewPerson(formData);
+        !isError && handleStateReset(setFormData);
     }
+
+    console.log(formData);
 
     return(
         <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '250px' }}>
@@ -93,7 +98,8 @@ const ListInput = ({ handleNewPerson }) => {
             </fieldset>
             <span style={{ color: 'red' }}>{validationErrors.vacationPreference}</span>
             <span style={{ margin: '5px' }} />
-                <DestinationDropdown />
+                <DestinationDropdown formData={formData} setFormData={setFormData} />
+                <span style={{ color: 'red' }}>{validationErrors.vacationLocation}</span>
             <span style={{ margin: '5px' }} />
             <label>Availability for appointment within the next seven days</label>
             <input
@@ -108,7 +114,7 @@ const ListInput = ({ handleNewPerson }) => {
             />
             <span style={{ color: 'red' }}>{validationErrors.meetingDate}</span>
             <span style={{ margin: '5px' }} />
-            <button onClick={() => hanldFormValidation(formData)} >Add Client Appointment</button>
+            <button className='btn btn-success' onClick={() => hanldFormValidation(formData)} >Add Client Appointment</button>
         </div>
     )
 }
