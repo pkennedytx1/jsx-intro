@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import axios from 'axios';
+import { Spacer } from './ListItem.styles';
 
 export const initialState = {
     loading: false,
@@ -73,13 +74,14 @@ export const DestinationDropdown = ({ formData, setFormData }) => {
                 type: 'UPDATE_LOCATION',
                 payload: e.target.value,
             })} name='destination-search' type='text' />
+            <Spacer mt='5px' />
             <button className='btn btn-primary' onClick={() => dispatch({
                 type: 'UPDATE_SEARCH',
                 payload: true,
             })} >Search</button>
             <label htmlFor='destination-dropdown'>Select your prefered destination</label>
             {state.loading ? 'Loading...' :
-                <select value={formData.vacationLocation} onChange={(e) => setFormData({
+                <select className='form-select' value={formData.vacationLocation} onChange={(e) => setFormData({
                     ...formData,
                     vacationLocation: e.target.value,
                 })} disabled={!state.places.length > 0} name='destination-.dropdown'>

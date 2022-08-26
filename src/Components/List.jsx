@@ -3,8 +3,9 @@ import { data as initialData } from '../data';
 import ListItem from './ListItem';
 import ListInput from './ListInput';
 import { Spacer } from './ListItem.styles';
+import { ListContainer } from './List.styles';
 
-const List = () => {
+const List = ({ showAppointments = false }) => {
     const [data, setData] = React.useState(initialData);
     const handleNewPerson = ({ firstName, lastName, vacationLocation, vacationPreference, meetingDate }) => {
         const lastId = data[data.length - 1].id;
@@ -35,9 +36,8 @@ const List = () => {
     }
 
     return(
-        <>
-            <ListInput handleNewPerson={handleNewPerson} handleStateReset={handleStateReset}/>
-            {
+        <ListContainer>
+            {showAppointments ?
                 data?.map((person) => {
                     return (
                         <>
@@ -50,9 +50,10 @@ const List = () => {
                         <Spacer mt={'10px'} />
                         </>
                     )
-                })
-            }          
-        </>
+                }) :
+                <ListInput handleNewPerson={handleNewPerson} handleStateReset={handleStateReset}/>    
+            }
+        </ListContainer>
     )
 }
 

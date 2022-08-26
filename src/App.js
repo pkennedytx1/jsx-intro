@@ -1,9 +1,9 @@
-import List from './Components/List';
+import Routes from './Routes';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export function App() {
   return (
-    <List />
+    <Routes />
   );
 }
 
