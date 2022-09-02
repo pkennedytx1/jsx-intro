@@ -41,7 +41,7 @@ const ListInput = ({ handleNewPerson, handleStateReset }) => {
     console.log(formData);
 
     return(
-        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '250px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
             <h2>Vacation Inquiry</h2>
             <label htmlFor="first-name">First Name</label>
             <input id='first-name'
